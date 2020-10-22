@@ -72,21 +72,10 @@ Inspired by @jbranchaud's [repo](https://github.com/jbranchaud/til) and @thought
 # Data Structures and Algorithms
 * [Binary search](dataStructuresAlgorithms/binarySearch.md)
 * [Linear search](dataStructuresAlgorithms/linearSearch.md)
-* [Insertion sort](dataStructuresAlgorithms/insertionSort.md)
-* [Big O notation](dataStructuresAlgorithms/bigONotation.md)
-* [Difference stack and queue](dataStructuresAlgorithms/stackQueue.md)
-* [Singly-Linked list](dataStructuresAlgorithms/singlyLinkedList.md)
-* [Doubly-linked list](dataStructuresAlgorithms/doublyLinkedList.md)
 * [Memoization](dataStructuresAlgorithms/memoization.md)
-* [Depth-First Search](dataStructuresAlgorithms/dfs.md)
-* [Breadth-first search](dataStructuresAlgorithms/bfs.md)
 * [Hash tables](dataStructuresAlgorithms/hashTables.md)
-* [Different types of tree traversals](dataStructuresAlgorithms/treeTraversals.md)
 * [Quick sort](dataStructuresAlgorithms/quickSort.md)
-* [Merge sort](dataStructuresAlgorithms/mergeSort.md)
-* [Recursive looping](dataStructuresAlgorithms/recursiveLooping.md)
 * [Bubble sort](dataStructuresAlgorithms/bubbleSort.md)
-* [Selection sort](dataStructuresAlgorithms/selectionSort.md)
 
 # Design patterns
 * [Intro](designPatterns/intro.md)
