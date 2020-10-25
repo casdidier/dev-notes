@@ -14,6 +14,7 @@ FP helps a lot `simplifying reading code`, then `maintain` and also by its desig
 `we're trading ease-of-writing for pain-of-reading`
 
 <!-- Clean code FP -->
+
 <!-- Rule 1 : prefer named function to anonymous : Name every single function
 if you sit there stumped, unable to come up with a good name for some function you've written,
  I'd strongly suggest you don't fully understand that function's purpose yet -- or it's just too broad or abstract.
