@@ -18,14 +18,22 @@ content-visibility
 
 ```
 
-## single line Layout
+## single line Layout [https://1linelayouts.glitch.me/]
 
 ### super centered
+```html
+ <div class="parent blue" >
+  <div class="box coral" contenteditable>
+    :)
+  </div>
+```
+
+```css
 .ex1 .parent {
   display: grid;
   place-items: center;
 }
-
+```
 
 
 
