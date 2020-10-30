@@ -90,3 +90,75 @@ doLogin(user,pw) {
 // ..
 
 ```
+
+## Building blocks of FP
+
+### unary function
+
+### identity function
+
+```js
+// version 1
+var getCurrentUser = function partiallyApplied(...laterArgs) {
+    return ajax(
+        "http://some.api/person",
+        { user: CURRENT_USER_ID },
+        ...laterArgs
+    );
+};
+
+// version 2
+var getCurrentUser = function outerPartiallyApplied(...outerLaterArgs){
+    var getPerson = function innerPartiallyApplied(...innerLaterArgs){
+        return ajax( "http://some.api/person", ...innerLaterArgs );
+    };
+
+    return getPerson( { user: CURRENT_USER_ID }, ...outerLaterArgs );
+}
+
+
+
+function partialRight(fn,...presetArgs) {
+    return function partiallyApplied(...laterArgs){
+        return fn( ...laterArgs, ...presetArgs );
+    };
+}
+
+// or the ES6 => arrow form
+var partialRight =
+    (fn,...presetArgs) =>
+        (...laterArgs) =>
+            fn( ...laterArgs, ...presetArgs );
+
+
+```
+
+
+### curry
+
+A technique similar to partial application, where a function that expects multiple arguments is broken down into successive chained functions that each take a single argument (arity: 1) and return another function to accept the next argument
+
+```js
+var curriedAjax = curry( ajax );
+
+var personFetcher = curriedAjax( "http://some.api/person" );
+
+var getCurrentUser = personFetcher( { user: CURRENT_USER_ID } );
+
+getCurrentUser( function foundUser(user){ /* .. */ } );
+
+
+[1,2,3,4,5].map( curry( add )( 3 ) );
+// [4,5,6,7,8]
+
+
+var adder = curry( add );
+
+// It might be helpful in the case where you know ahead of time that add(..) is the function to be adapted, but the value 3 isn't known yet:
+
+// later
+[1,2,3,4,5].map( adder( 3 ) );
+// [4,5,6,7,8]
+
+
+```
