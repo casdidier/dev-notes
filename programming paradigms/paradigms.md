@@ -162,3 +162,56 @@ var adder = curry( add );
 
 
 ```
+
+```The advantage of currying here is that each call to pass in an argument produces another function that's more specialized, and we can capture and use that new function later in the program```
+
+FP use closure to remember the arguments over time until all have been received, and then the original function can be invoked.
+
+
+```js
+
+function sum(...nums) {
+    var total = 0;
+    for (let num of nums) {
+        total += num;
+    }
+    return total;
+}
+
+sum( 1, 2, 3, 4, 5 );                       // 15
+
+// now with currying:
+// (5 to indicate how many we should wait for)
+var curriedSum = curry( sum, 5 );
+
+curriedSum( 1 )( 2 )( 3 )( 4 )( 5 );        // 15
+
+// manually curried
+function curriedSum(v1) {
+    return function(v2){
+        return function(v3){
+            return function(v4){
+                return function(v5){
+                    return sum( v1, v2, v3, v4, v5 );
+                };
+            };
+        };
+    };
+}
+
+// manually curried with ES6
+curriedSum =
+    v1 =>
+        v2 =>
+            v3 =>
+                v4 =>
+                    v5 =>
+                        sum( v1, v2, v3, v4, v5 );
+
+
+// oneline curry
+curriedSum = v1 => v2 => v3 => v4 => v5 => sum( v1, v2, v3, v4, v5 );
+
+
+
+```
