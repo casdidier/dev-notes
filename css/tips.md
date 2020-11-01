@@ -18,8 +18,9 @@ content-visibility
 
 ```
 
-## single line Layout [https://1linelayouts.glitch.me/]
-
+## single line Layout
+[https://1linelayouts.glitch.me/]
+[https://www.youtube.com/watch?v=qm0IfG1GyZU&list=WL&index=163]
 ### super centered
 ```html
  <div class="parent blue" >
