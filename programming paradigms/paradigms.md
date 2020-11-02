@@ -215,3 +215,99 @@ curriedSum = v1 => v2 => v3 => v4 => v5 => sum( v1, v2, v3, v4, v5 );
 
 
 ```
+
+
+### Point free style
+[https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch3.md]
+
+```js
+
+// convenience to avoid any potential binding issue
+// with trying to use `console.log` as a function
+function output(txt) {
+    console.log( txt );
+}
+
+function printIf( predicate, msg ) {
+    if (predicate( msg )) {
+        output( msg );
+    }
+}
+
+function isShortEnough(str) {
+    return str.length <= 5;
+}
+
+var msg1 = "Hello";
+var msg2 = msg1 + " World";
+
+printIf( isShortEnough, msg1 );         // Hello
+printIf( isShortEnough, msg2 );
+
+function isLongEnough(str) {
+    return !isShortEnough( str );
+}
+
+printIf( isLongEnough, msg1 );
+printIf( isLongEnough, msg2 );          // Hello World
+
+
+// what you would do ... to simplify
+
+function isLongEnough(str) {
+    return !isShortEnough( str );
+}
+
+printIf( isLongEnough, msg1 );
+printIf( isLongEnough, msg2 );          // Hello World
+
+// with point free style
+
+function not(predicate) {
+    return function negated(...args){
+        return !predicate( ...args );
+    };
+}
+
+// or the ES6 => arrow form
+var not =
+    predicate =>
+        (...args) =>
+            !predicate( ...args );
+
+
+var isLongEnough = not( isShortEnough );
+
+printIf( isLongEnough, msg2 );          // Hello World
+
+// That's pretty good, isn't it? But we could keep going. printIf(..) could be refactored to be point-free itself.
+
+// We can express the if conditional part with a when(..) utility:
+
+function when(predicate,fn) {
+    return function conditional(...args){
+        if (predicate( ...args )) {
+            return fn( ...args );
+        }
+    };
+}
+
+// or the ES6 => form
+var when =
+    (predicate,fn) =>
+        (...args) =>
+            predicate( ...args ) ? fn( ...args ) : undefined;
+
+
+
+Partial application is a technique for reducing the arity (that is, the expected number of arguments to a function) by creating a new function where some of the arguments are preset.
+
+Currying is a special form of partial application where the arity is reduced to 1, with a chain of successive chained function calls, each which takes one argument. Once all arguments have been specified by these function calls, the original function is executed with all the collected arguments. You can also undo a currying.
+
+Other important utilities like unary(..), identity(..), and constant(..) are part of the base toolbox for FP.
+
+Point-free is a style of writing code that eliminates unnecessary verbosity of mapping parameters ("points") to arguments, with the goal of making code easier to read/understand.
+
+All of these techniques twist functions around so they can work together more naturally. With your functions shaped compatibly now, the next chapter will teach you how to combine them to model the flows of data through your program.
+
+```
