@@ -34,3 +34,8 @@ To start debugging your Node.js app in the Chrome dev tools, type the following 
 `node --inspect-brk app.js`
 
 Then, open a new tab in Chrome, enter `chrome://inspect` and click on the link *Open Dedicated DevTools for Node.js*.
+
+## display in react
+
+```js
+<p>{JSON.stringify(obj, 2, null)}</p>
