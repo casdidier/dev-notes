@@ -428,3 +428,33 @@ function pipe(...fns) {
   };
 }
 ```
+
+`So the main difference between compose and pipe is the order of the composition. Compose performs a right-to-left function composition since Pipe performs a left-to-right composition`
+
+`Imperative code is primarily concerned with explicitly stating how to accomplish a task. Declarative code states what the outcome should be, and leaves the implementation to some other responsibility.` [https://github.com/getify/Functional-Light-JS/blob/master/manuscript/ch4.md]
+
+```
+ES6 added many syntactic affordances that transform old imperative operations into newer declarative forms. Perhaps one of the clearest is destructuring. Destructuring is a pattern for assignment that describes how a compound value (object, array) is taken apart into its constituent values.
+```
+
+```js
+function getData() {
+  return [1, 2, 3, 4, 5];
+}
+
+// imperative
+var tmp = getData();
+var a = tmp[0];
+var b = tmp[3];
+
+// declarative
+var [a, , , b] = getData();
+
+// imperative
+function shorterWords(text) {
+  return skipLongWords(unique(words(text)));
+}
+
+// declarative
+var shorterWords = compose(skipLongWords, unique, words);
+```
