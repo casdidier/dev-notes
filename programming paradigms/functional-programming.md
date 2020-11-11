@@ -342,3 +342,56 @@ function uniqueWords(str) {
   return unique(words(str));
 }
 ```
+
+Way to compose function
+
+```js
+function compose2(fn2, fn1) {
+  return function composed(origValue) {
+    return fn2(fn1(origValue));
+  };
+}
+
+// or the ES6 => form
+var compose2 = (fn2, fn1) => (origValue) => fn2(fn1(origValue));
+```
+
+The above function
+
+```js
+var uniqueWords = compose2(unique, words);
+```
+
+#### General Composition
+
+finalValue <-- func1 <-- func2 <-- ... <-- funcN <-- origValue
+
+```js
+function compose(...fns) {
+  return function composed(result) {
+    // copy the array of functions
+    var list = [...fns];
+
+    while (list.length > 0) {
+      // take the last function off the end of the list
+      // and execute it
+      result = list.pop()(result);
+    }
+
+    return result;
+  };
+}
+
+// or the ES6 => form
+var compose = (...fns) => (result) => {
+  var list = [...fns];
+
+  while (list.length > 0) {
+    // take the last function off the end of the list
+    // and execute it
+    result = list.pop()(result);
+  }
+
+  return result;
+};
+```
