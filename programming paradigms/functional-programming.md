@@ -394,4 +394,37 @@ var compose = (...fns) => (result) => {
 
   return result;
 };
+
+// Note: uses a `<= 4` check instead of the `> 4` check
+// that `skipShortWords(..)` uses
+function skipLongWords(list) {
+  /* .. */
+}
+
+var filterWords = partialRight(compose, unique, words);
+
+var biggerWords = filterWords(skipShortWords);
+var shorterWords = filterWords(skipLongWords);
+
+biggerWords(text);
+// ["compose","functions","together","output","first",
+// "function","input","second"]
+
+shorterWords(text);
+// ["to","two","pass","the","of","call","as"]
+
+// pipe(..) is identical to compose(..) except it processes through the list of functions in left-to-right order:
+function pipe(...fns) {
+  return function piped(result) {
+    var list = [...fns];
+
+    while (list.length > 0) {
+      // take the first function from the list
+      // and execute it
+      result = list.shift()(result);
+    }
+
+    return result;
+  };
+}
 ```
