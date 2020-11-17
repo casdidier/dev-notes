@@ -136,3 +136,15 @@ React Native Elements (My Recommendation): https://react-native-elements.github.
 React Native Paper: https://callstack.github.io/react-native-paper/
 
 Native Base: https://nativebase.io/
+
+## Core Components and Native Components
+
+### Native Components (community + yours)
+
+- community-contributed components => https://reactnative.directory/
+- you can build your own native components
+
+### [Core Components](https://reactnative.dev/docs/components-and-apis)
+
+
+## 
