@@ -2,6 +2,12 @@
 
 npm install -g expo-cli
 
+### how to start a project
+
+`npm install`
+`expo start`
+`a`
+
 ## Fundamentals
 
 ```js
@@ -146,5 +152,6 @@ Native Base: https://nativebase.io/
 
 ### [Core Components](https://reactnative.dev/docs/components-and-apis)
 
+## Debugging
 
-## 
+CTRL + M : access the menu for the phone debugging menu

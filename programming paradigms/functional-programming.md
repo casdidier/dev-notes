@@ -458,3 +458,7 @@ function shorterWords(text) {
 // declarative
 var shorterWords = compose(skipLongWords, unique, words);
 ```
+
+## Effects on the Side, Please
+
+`In programming, we also deal entirely in cause and effect. If you call a function (cause), it displays a message on the screen (effect).`
