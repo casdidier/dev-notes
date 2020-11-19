@@ -1,0 +1,1 @@
+//TODO [https://www.benmvp.com/blog/learning-es6-12-tricks-for-es6-fun/]
