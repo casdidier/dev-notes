@@ -13,3 +13,17 @@ killall node
 ```
 
 All node servers should be stopped and you should be able to restart the ones you need.
+
+
+# when you get this error Port is already in use
+
+```
+Something is already running at port 8080
+? Would you like to run the app at another port instead? › (Y/n)
+```
+
+`kill \$(lsof -t -i:8080)
+
+[https://www.benmvp.com/blog/kill-process-running-port/]
+**BEST** #rocket#
+`npx kill-port 8080
