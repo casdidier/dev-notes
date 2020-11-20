@@ -4,8 +4,14 @@ ressource => https://slides.benmvp.com/2020/tsconf/react.html#/1
 [Cheat sheets](https://github.com/typescript-cheatsheets/react)
 [learning plan](https://github.com/antonjb/TypeScript-Learning-Plan)
 [playground](https://www.typescriptlang.org/docs/handbook/intro.html)
+[best learning book](https://github.com/basarat/typescript-book)
 
 ## SETUP: start a project with TS
+
+install TS globally :
+npm i -g typescript
+
+tsc --version
 
 ### with Create React App
 
@@ -167,6 +173,34 @@ const App = () => {
 ```
 
 ### What are TS generics ? [https://www.youtube.com/watch?v=nePDL5lQSE4&list=WL&index=282&t=1s]
+
+generics give flexibility to Typed system, to give type dynamically to functions
+
+```ts
+function removeItemFromArray<T>(array: Array<T>, item: T): Array<T> {
+  const index = arr.findIndex((i) => i === item);
+  arr.splice(index, 1);
+  return arr;
+}
+
+removeItemFromArray<number>([1, 2, 3, 4], 2); // OK
+
+removeItemFromArray<string>(["1", "2", "3", "4"], "2"); // OK
+
+class Collection<TypeOfItem> {
+  items: Array<TypeOfItem> = [];
+  doSomething(item: TypeOfItem) {}
+}
+
+class Collection<TypeOfItem, SecondType> {
+  items: Array<TypeOfItem> = [];
+  items: Array<SecondType> = [];
+  doSomething(item: TypeOfItem) {}
+}
+
+const c1 = new Collection<number>([1, 2, 3]); //ok
+const c2 = new Collection<string>(["2", "2", "3"]); //ok
+```
 
 2. useEffect
 
