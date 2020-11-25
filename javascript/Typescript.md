@@ -3,7 +3,7 @@
 ressource => https://slides.benmvp.com/2020/tsconf/react.html#/1
 [Cheat sheets](https://github.com/typescript-cheatsheets/react)
 [learning plan](https://github.com/antonjb/TypeScript-Learning-Plan)
-[playground](https://www.typescriptlang.org/docs/handbook/intro.html)
+[playground](https://www.typescriptlang.org/docs/handbook/intro.html)  https://codesandbox.io/s/knhi6?file=/index.ts
 [best learning book](https://github.com/basarat/typescript-book)
 
 ## SETUP: start a project with TS
@@ -44,6 +44,26 @@ Note: many of these steps are actually just common practice Node.js setup steps
    `npx tsc --init --rootDir src --outDir lib --esModuleInterop --resolveJsonModule --lib es6,dom --module commonjs`
    That's it! Fire up your IDE (e.g. code .) and play around. Now you can use all the built in node modules (e.g. import \* as fs from 'fs';) with all the safety and developer ergonomics of TypeScript!
    All your TypeScript code goes in src and the generated JavaScript goes in lib.
+
+## Cloud setups:
+
+TypeScript Playground with React just if you are debugging types (and reporting issues)
+
+CodeSandbox - cloud IDE, boots up super fast
+
+Stackblitz - same as CodeSandbox
+
+Local dev setups:
+
+## local setups:
+
+Next.js: npx create-next-app -e with-typescript will create in your current folder
+
+Create React App: npx create-react-app name-of-app --template typescript will create in new folder
+
+## React + Typescript CHEAT SHEET
+
+https://react-typescript-cheatsheet.netlify.app/docs/basic/setup
 
 ## Props
 
