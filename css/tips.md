@@ -1,13 +1,62 @@
-
-
 # Layout #TODO
 
 ```css
-position: sticky
+position: sticky;
 ```
 
-Logical Properties
+```keep the footer at the bottom
 
+https://codepen.io/5t3ph/pen/abvboxz
+
+```css
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+footer {
+  margin-top: auto;
+}
+
+// Optional
+main {
+  margin: 0 auto;
+  // or: align-self: center
+  max-width: 80ch;
+}
+
+```
+
+```Equal Height Elements: Flexbox vs. Grid
+https://moderncss.dev/equal-height-elements-flexbox-vs-grid/
+
+```css
+.flexbox {
+  display: flex;
+
+  // Ensure content elements fill up the .column
+  .element {
+    height: 100%;
+  }
+}
+
+
+
+.grid {
+  display: grid;
+  grid-auto-flow: column;
+
+  // Ensure content elements fill up the .column
+  .element {
+    height: 100%;
+  }
+}
+
+```
+
+
+Logical Properties
 
 ```css
 margin-block-start, padding-inline-end, etc.
@@ -19,14 +68,16 @@ content-visibility
 ```
 
 ## single line Layout
+
 [https://1linelayouts.glitch.me/]
 [https://www.youtube.com/watch?v=qm0IfG1GyZU&list=WL&index=163]
+
 ### super centered
+
 ```html
- <div class="parent blue" >
-  <div class="box coral" contenteditable>
-    :)
-  </div>
+<div class="parent blue">
+  <div class="box coral" contenteditable>:)</div>
+</div>
 ```
 
 ```css
@@ -35,9 +86,6 @@ content-visibility
   place-items: center;
 }
 ```
-
-
-
 
 # Shapes & Graphics #TODO
 
@@ -52,8 +100,6 @@ backdrop-filter
 
 ```
 
-
-
 # Interactions
 
 ```css
@@ -67,7 +113,6 @@ pointer-events
 
 
 ```
-
 
 # Typography
 
@@ -102,14 +147,11 @@ line-clamp
 
 ## CSS Animations
 
-
 ```css
 perspective
 
 
 ```
-
-
 
 # Media queries
 
@@ -130,14 +172,13 @@ min(), max(), and clamp()
 
 ```
 
-
 # Units & Selectors
 
 ## Units
 
-
 ## Pseudo elements
-```css
+
+````css
 ::first-line
 ::after
 
@@ -182,8 +223,7 @@ div[foo~="bar"] (Contains word)
 
 div[foo*="bar"] (Contains substring)
 
-```
-
+````
 
 ## Links/URLs
 
@@ -199,6 +239,7 @@ div[foo*="bar"] (Contains substring)
 ```
 
 ## Interactions
+
 ```css
 :hover
 
@@ -211,7 +252,6 @@ div[foo*="bar"] (Contains substring)
 :focus-visible
 
 ```
-
 
 ## Forms Controls
 
@@ -240,7 +280,6 @@ div[foo*="bar"] (Contains substring)
 
 ```
 
-
 ## CSS-in-JS
 
 Styled Components
@@ -249,8 +288,8 @@ Styled JSX
 Emotion
 CSS Modules
 
-
 ## Utilities
+
 Stylelint
 
 PurgeCSS
@@ -268,3 +307,7 @@ Knowing specificity rules, being able to create layouts
 Mastering animations, interactions, transitions, etc.
 
 Able to style an entire front-end from scratch following a consistent methodology
+
+#### RESSOURCES
+
+[CSS history](https://medium.com/actualize-network/modern-css-explained-for-dinosaurs-5226febe3525)
