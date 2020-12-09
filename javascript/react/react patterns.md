@@ -284,3 +284,7 @@ const HelloWorld = (props) => {
 }
 
 ```
+
+#### Ressources
+
+[Patterns](https://dev.to/alexi_be3/react-component-patterns-49ho)
