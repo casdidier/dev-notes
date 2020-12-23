@@ -57,3 +57,69 @@ db.zips.find({"state": "NY"}).count()
 db.zips.find({"state": "NY", "city": "ALBANY"})
 
 db.zips.find({"state": "NY", "city": "ALBANY"}).pretty()
+
+
+## insert
+
+db.inspections.insert({
+      "_id" : ObjectId("56d61033a378eccde8a8354f"),
+      "id" : "10021-2015-ENFO",
+      "certificate_number" : 9278806,
+      "business_name" : "ATLIXCO DELI GROCERY INC.",
+      "date" : "Feb 20 2015",
+      "result" : "No Violation Issued",
+      "sector" : "Cigarette Retail Dealer - 127",
+      "address" : {
+              "city" : "RIDGEWOOD",
+              "zip" : 11385,
+              "street" : "MENAHAN ST",
+              "number" : 1712
+         }
+  })
+
+db.inspections.insert({
+      "id" : "10021-2015-ENFO",
+      "certificate_number" : 9278806,
+      "business_name" : "ATLIXCO DELI GROCERY INC.",
+      "date" : "Feb 20 2015",
+      "result" : "No Violation Issued",
+      "sector" : "Cigarette Retail Dealer - 127",
+      "address" : {
+              "city" : "RIDGEWOOD",
+              "zip" : 11385,
+              "street" : "MENAHAN ST",
+              "number" : 1712
+         }
+  })
+
+db.inspections.find({"id" : "10021-2015-ENFO", "certificate_number" : 9278806}).pretty()
+
+## insert ordereded
+
+db.inspections.insert([{ "_id": 1, "test": 1 },{ "_id": 1, "test": 2 },
+                       { "_id": 3, "test": 3 }],{ "ordered": false })
+
+## Update
+
+db.zips.updateMany({ "city": "HUDSON" }, { "$inc": { "pop": 10 } })
+
+db.zips.updateOne({ "zip": "12534" }, { "$set": { "population": 17630 } })
+
+db.grades.updateOne({ "student_id": 250, "class_id": 339 },
+                    { "$push": { "scores": { "type": "extra credit",
+                                             "score": 100 }
+                                }
+                     })
+
+db.zips.updateMany({ "city": "HUDSON" }, { "$inc": { "pop": 10 } })
+
+##
+
+<!-- Delete all the documents that have test field equal to 1. -->
+
+db.inspections.deleteMany({ "test": 1 })
+
+db.inspections.deleteOne({ "test": 3 })
+
+<!-- Drop the inspection collection. -->
+db.inspection.drop()
