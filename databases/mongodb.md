@@ -36,11 +36,17 @@ mongoimport --uri="mongodb+srv://<your username>:<your password>@<your cluster>.
 
 mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
 
-mongo "mongodb+srv://m001-student:admin@/sandbox.yfm6k.mongodb.net.mongodb.net/admin"
+mongo "mongodb+srv://m001-student:admin@/sandbox.yfm6k.mongodb.net/admin"
 
 mongo "mongodb+srv://sandbox.yfm6k.mongodb.net/maindb" --username m001-student
 mongo "mongodb+srv://sandbox.yfm6k.mongodb.net/mdbu" --username m001-student
+
+<!-- from the forum -->
+mongo "mongodb+srv://sandbox.yfm6k.mongodb.net/test" --username m001-student --password m001-mongodb-basics
+
+<!-- working -->
 mongo "mongodb+srv://sandbox.yfm6k.mongodb.net/m001" --username m001-student
+
 
 ## Find command
 
@@ -123,3 +129,14 @@ db.inspections.deleteOne({ "test": 3 })
 
 <!-- Drop the inspection collection. -->
 db.inspection.drop()
+
+
+## query operators
+
+<!-- How many documents in the sample_training.zips collection have fewer than 1000 people listed in the pop field? -->
+db.zips.find({ "pop": { "$lte" : 1000 }}).pretty()
+
+<!-- What is the difference between the number of people born in 1998 and the number of people born after 1998 in the sample_training.trips collection? -->
+
+db.trips.find({ "birth year": { "$gt": 1998 }}).count()
+db.trips.find({ "birth year": 1998 }).count()
