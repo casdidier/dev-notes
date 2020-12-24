@@ -36,12 +36,7 @@ mongoimport --uri="mongodb+srv://<your username>:<your password>@<your cluster>.
 
 mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
 
-mongo "mongodb+srv://m001-student:admin@/sandbox.yfm6k.mongodb.net/admin"
-
-mongo "mongodb+srv://sandbox.yfm6k.mongodb.net/maindb" --username m001-student
-mongo "mongodb+srv://sandbox.yfm6k.mongodb.net/mdbu" --username m001-student
-
-<!-- from the forum -->
+<!-- from the forum working -->
 mongo "mongodb+srv://sandbox.yfm6k.mongodb.net/test" --username m001-student --password m001-mongodb-basics
 
 <!-- working -->
@@ -140,3 +135,17 @@ db.zips.find({ "pop": { "$lte" : 1000 }}).pretty()
 
 db.trips.find({ "birth year": { "$gt": 1998 }}).count()
 db.trips.find({ "birth year": 1998 }).count()
+
+<!-- Find all documents where airplanes CR2 or A81 left or landed in the KZN airport: -->
+
+db.routes.find({ "$and": [ { "$or" :[ { "dst_airport": "KZN" },
+                                    { "src_airport": "KZN" }
+                                  ] },
+                          { "$or" :[ { "airplane": "CR2" },
+                                     { "airplane": "A81" } ] }
+                         ]}).pretty()
+
+<!-- How many businesses in the sample_training.inspections dataset have the inspection result "Out of Business" and belong to the "Home Improvement Contractor - 100" sector? -->
+
+db.inspections.find({ "result": "Out of Business",
+                      "sector": "Home Improvement Contractor - 100" }).count()
