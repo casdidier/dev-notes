@@ -1,3 +1,13 @@
+## connect with shell
+
+mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
+
+<!-- from the forum working -->
+mongo "mongodb+srv://sandbox.yfm6k.mongodb.net/test" --username m001-student --password m001-mongodb-basics
+
+<!-- working -->
+mongo "mongodb+srv://sandbox.yfm6k.mongodb.net/m001" --username m001-student
+
 # Finding the current database you’re in
 
 `db
@@ -32,15 +42,7 @@ mongorestore --uri "mongodb+srv://<your username>:<your password>@<your cluster>
 
 mongoimport --uri="mongodb+srv://<your username>:<your password>@<your cluster>.mongodb.net/sample_supplies" --drop sales.json
 
-## connect with shell
 
-mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
-
-<!-- from the forum working -->
-mongo "mongodb+srv://sandbox.yfm6k.mongodb.net/test" --username m001-student --password m001-mongodb-basics
-
-<!-- working -->
-mongo "mongodb+srv://sandbox.yfm6k.mongodb.net/m001" --username m001-student
 
 
 ## Find command
@@ -149,3 +151,79 @@ db.routes.find({ "$and": [ { "$or" :[ { "dst_airport": "KZN" },
 
 db.inspections.find({ "result": "Out of Business",
                       "sector": "Home Improvement Contractor - 100" }).count()
+
+
+<!-- Which is the most succinct query to return all documents from the sample_training.inspections collection where the inspection date is either "Feb 20 2015", or "Feb 21 2015" and the company is not part of the "Cigarette Retail Dealer - 127" sector? -->
+db.inspections.find(
+  { "$or": [ { "date": "Feb 20 2015" },
+             { "date": "Feb 21 2015" } ],
+    "sector": { "$ne": "Cigarette Retail Dealer - 127" }}).pretty()
+
+
+
+db.zips.find({ "pop": { "$gt": 5000, "$lt": 1000000 }}).count()
+db.zips.find({ "$nor": [ { "pop": { "$lt":5000 } },
+             { "pop": { "$gt": 1000000 } } ] } ).count()
+
+
+<!-- How many companies in the sample_training.companies dataset were either founded in 2004 and either have the social category_code or web category_code, or were founded in the month of October and also either have the social category_code or web category_code? -->
+
+db.companies.find().pretty()
+
+
+## Expressive Query Operator
+
+db.companies.find({ "$nor": [ { "pop": { "$lt":5000 } },
+             { "pop": { "$gt": 1000000 } } ] } ).count()
+
+
+<!-- Find all documents where the trip started and ended at the same station: -->
+db.trips.find({ "$expr": { "$eq": [ "$end station id", "$start station id"] }
+              }).count()
+
+<!-- Find all documents where the trip lasted longer than 1200 seconds, and started and ended at the same station: -->
+db.trips.find({ "$expr": { "$and": [ { "$gt": [ "$tripduration", 1200 ]},
+                         { "$eq": [ "$end station id", "$start station id" ]}
+                       ]}}).count()
+
+<!-- find all the companies that have more employees than the year in which they were founded? -->
+db.companies.find(
+  { "$expr": { "$lt": [ "$founded_year", "$number_of_employees" ]}}).count()
+
+
+
+db.companies.find(
+  { "$expr": { "$eq": [ "$permalink", "$twitter_username" ]}}).count()
+
+
+db.companies.find({"$expr":{"$eq":["$permalink","$twitter_username"]}}).count()
+
+<!-- array operator -->
+
+<!-- Find all documents with exactly 20 amenities which include all the amenities listed in the query array: -->
+
+db.listingsAndReviews.find({ "amenities": {
+                                  "$size": 20,
+                                  "$all": [ "Internet", "Wifi",  "Kitchen",
+                                           "Heating", "Family/kid friendly",
+                                           "Washer", "Dryer", "Essentials",
+                                           "Shampoo", "Hangers",
+                                           "Hair dryer", "Iron",
+                                           "Laptop friendly workspace" ]
+                                         }
+                            }).pretty()
+
+
+
+db.listingsAndReviews.find({ "reviews": { "$size":50 },
+                             "accommodates": { "$gt":6 }})
+
+
+
+<!-- Using the sample_airbnb.listingsAndReviews collection find out how many documents have the "property_type" "House", and include "Changing table" as one of the "amenities"? -->
+db.listingsAndReviews.find({ "amenities": {
+                                  "$all": ["Changing table", "Free parking on premises", "Air conditioning", "Wifi"],
+                                         },
+                                        "bedrooms": 2
+                            }).pretty()
+
