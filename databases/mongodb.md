@@ -227,3 +227,71 @@ db.listingsAndReviews.find({ "amenities": {
                                         "bedrooms": 2
                             }).pretty()
 
+## Array Operators and Projection
+db.companies.find({query},{projection})
+
+use sample_airbnb
+
+Find all documents with exactly 20 amenities which include all the amenities listed in the query array, and display their price and address:
+
+db.listingsAndReviews.find({ "amenities":
+        { "$size": 20, "$all": [ "Internet", "Wifi",  "Kitchen", "Heating",
+                                 "Family/kid friendly", "Washer", "Dryer",
+                                 "Essentials", "Shampoo", "Hangers",
+                                 "Hair dryer", "Iron",
+                                 "Laptop friendly workspace" ] } },
+                            {"price": 1, "address": 1}).pretty()
+
+
+Find all documents that have Wifi as one of the amenities only include price and address in the resulting cursor:
+
+db.listingsAndReviews.find({ "amenities": "Wifi" },
+                           { "price": 1, "address": 1, "_id": 0 }).pretty()
+
+ <!-- How many companies in the sample_training.companies collection have offices in the city of Seattle? -->
+
+db.companies.find({ "offices": "Wifi" },
+                           { "price": 1, "address": 1, "_id": 0 }).pretty()
+
+"offices" is an array that contains documents with the address information from each office. We use $elemMatch to return all documents in which an office array element contains the field city with the value Seattle.
+
+<!-- queries will return only the names of companies from the sample_training.companies collection that had exactly 8 funding rounds -->
+
+db.companies.find({ "funding_rounds": { "$size": 8 } },
+                  { "name": 1, "_id": 0 })
+
+## Array Operators and Sub-Documents
+use sample_training
+
+db.trips.findOne({ "start station location.type": "Point" })
+
+db.companies.find({ "relationships.0.person.last_name": "Zuckerberg" },
+                  { "name": 1 }).pretty()
+
+db.companies.find({ "relationships.0.person.first_name": "Mark",
+                    "relationships.0.title": { "$regex": "CEO" } },
+                  { "name": 1 }).count()
+
+
+db.companies.find({ "relationships.0.person.first_name": "Mark",
+                    "relationships.0.title": {"$regex": "CEO" } },
+                  { "name": 1 }).pretty()
+
+db.companies.find({ "relationships":
+                      { "$elemMatch": { "is_past": true,
+                                        "person.first_name": "Mark" } } },
+                  { "name": 1 }).pretty()
+
+db.companies.find({ "relationships":
+                      { "$elemMatch": { "is_past": true,
+                                        "person.first_name": "Mark" } } },
+                  { "name": 1 }).count()
+
+<!-- How many trips in the sample_training.trips collection started at stations that are to the west of the -74 latitude coordinate? -->
+db.trips.find({ "start station location.coordinates": { "$lt": -74 }}).count()
+
+The "start station location" has a sub-document that contains the coordinates array. To get to this coordinates array we must use use dot-notation. We can issue a range query to find all documents in this latitude. The caveat is to remember that all trips take place in NYC so the longitude value in the coordinates array will always be positive, and we don't have to worry about it when issuing a range query like this.
+
+
+<!-- How many inspections from the sample_training.inspections collection were conducted in the city of NEW YORK? -->
+db.inspections.find({ "address.city": { "$eq": "NEW YORK" }}).count()
