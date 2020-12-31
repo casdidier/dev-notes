@@ -155,3 +155,9 @@ Native Base: https://nativebase.io/
 ## Debugging
 
 CTRL + M : access the menu for the phone debugging menu
+
+## Layout
+
+align-content or justify-content is only when you use flex-wrap
+
+flexBasis map to width or height depending on the main primary axis

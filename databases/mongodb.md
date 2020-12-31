@@ -295,3 +295,42 @@ The "start station location" has a sub-document that contains the coordinates ar
 
 <!-- How many inspections from the sample_training.inspections collection were conducted in the city of NEW YORK? -->
 db.inspections.find({ "address.city": { "$eq": "NEW YORK" }}).count()
+
+
+## Agregation Framework
+
+<!-- What room types are present in the sample_airbnb.listingsAndReviews collection? -->
+db.listingsAndReviews.aggregate([{ "$project": { "room_type": 1, "_id": 0 }},
+                                 { "$group": { "_id": "$room_type" } } ])
+
+
+
+<!-- We first must filter out the documents where the founded year is not null, then project the fields that we are looking for, which is name, and founded_year in this case. Then we sort the cursor in increasing order, so the first results will have the smallest value for the founded_year field. Finally, we limit the results to our top 5 documents in the cursor, thus getting the 5 oldest companies in this collection. -->
+db.companies.find({ "founded_year": { "$ne": null }},
+                  { "name": 1, "founded_year": 1 }
+                 ).sort({ "founded_year": 1 }).limit(5)
+
+
+db.companies.find({ "founded_year": { "$ne": null }},
+                  { "name": 1, "founded_year": 1 }
+                 ).limit(5).sort({ "founded_year": 1 })
+
+<!-- In what year was the youngest bike rider from the sample_training.trips collection born? -->
+use sample_training
+
+
+db.trips.find({ "birth year": { "$ne": "" }},
+                  { "birth year": 1 }
+                 ).limit(5).sort({ "birth year": -1 })
+
+### Indexes
+
+use sample_training
+
+db.trips.find({ "birth year": 1989 })
+
+db.trips.find({ "start station id": 476 }).sort( { "birth year": 1 } )
+
+db.trips.createIndex({ "birth year": 1 })
+
+db.trips.createIndex({ "start station id": 476, "birth year": 1 })
