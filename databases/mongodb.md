@@ -1,3 +1,17 @@
+
+## in a nutshell
+
+https://university.mongodb.com/certification/developer/about?offering=C100DEV/2021_March
+
+Philosophy & Features: performance, JSON, BSON, fault tolerance, disaster recovery, horizontal scaling, and the Mongo shell
+CRUD: Create, Read, Update, and Delete operations
+Data Modeling: embedding, references, document growth, modeling one-to-one and one-to-many relationships, modeling for atomic operations, modeling tree structures
+Indexing and Performance: single key, compound, multi-key, mechanics, storage engines, and performance
+Aggregation: pipeline, operators, memory usage, sort, skip, and limit
+Replication: configuration, oplog concepts, write concern, elections, failover, and deployment to multiple data centers
+Sharding: components, when to shard, balancing, shard keys, and hashed shard keys
+
+
 ## connect with shell
 
 mongo "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
@@ -116,7 +130,7 @@ db.grades.updateOne({ "student_id": 250, "class_id": 339 },
 
 db.zips.updateMany({ "city": "HUDSON" }, { "$inc": { "pop": 10 } })
 
-##
+## logical operators
 
 <!-- Delete all the documents that have test field equal to 1. -->
 
@@ -126,6 +140,13 @@ db.inspections.deleteOne({ "test": 3 })
 
 <!-- Drop the inspection collection. -->
 db.inspection.drop()
+
+<!-- How many companies in the sample_training.companies dataset were either founded in 2004 and either have the social category_code or web category_code, or were founded in the month of October and also either have the social category_code or web category_code? -->
+db.companies.find({ "$and": [
+                        { "$or": [ { "founded_year": 2004 },
+                                   { "founded_month": 10 } ] },
+                        { "$or": [ { "category_code": "web" },
+                                   { "category_code": "social" }]}]}).count()
 
 
 ## query operators
