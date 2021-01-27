@@ -308,6 +308,10 @@ Mastering animations, interactions, transitions, etc.
 
 Able to style an entire front-end from scratch following a consistent methodology
 
+
+## Common issues
+https://www.smashingmagazine.com/2018/12/common-css-issues-front-end-projects/
+
 #### RESSOURCES
 
 [CSS history](https://medium.com/actualize-network/modern-css-explained-for-dinosaurs-5226febe3525)
