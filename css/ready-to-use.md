@@ -34,3 +34,26 @@
 }
 
 ```
+
+
+## Text effect fade in
+
+```css
+.text h1 {
+  font-size: 40px;
+  opacity: 0;
+  animation: fadein 1s;
+  animation-delay: 0.2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+```
