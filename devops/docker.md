@@ -4,9 +4,9 @@ Docker is a tool that helps developers build, deploy, and run applications more 
 
 ## Basic commands:
 
-* Build containers from Dockerfile: `docker build . -t <name>`
+- Build containers from Dockerfile: `docker build . -t <name>`
 
-* Run containers:
+- Run containers:
 
 `docker run <name>`
 
@@ -14,27 +14,27 @@ This maps the local port 5000 to the docker port 8080. You should be able to vie
 
 `docker run -p 5000:8080 <image-id>`
 
-* If got a `docker-compose.yml` file: `docker-compose up`
+- If got a `docker-compose.yml` file: `docker-compose up`
 
-* Show current Docker processes running: `docker ps`
+- Show current Docker processes running: `docker ps`
 
-* Show current Docker images: `docker images`
+- Show current Docker images: `docker images`
 
-* Delete an image: `docker rmi <imageID>`
+- Delete an image: `docker rmi <imageID>`
 
-* Kill a container: `docker kill <imageID>`
+- Kill a container: `docker kill <imageID>`
 
 ---
 
 More details in [my blog post](https://levelup.gitconnected.com/intro-to-docker-for-front-end-developers-22ed1942c4a5)
 
-
 ## docker file
+
 FROM node:12
 
 WORKDIR /app
 
-COPY package*.json ./
+COPY package\*.json ./
 
 RUN npm install
 
@@ -46,10 +46,10 @@ EXPOSE 8080
 
 CMD [ "npm", "start" ]
 
-
 ## docker yaml
 
 Docker Compose makes it easy to manage multiple containers and volumes.
+
 ```
 version: '3'
 services:
@@ -66,6 +66,11 @@ services:
 
 volumes:
   db-data:
-  ```
+```
+
 Run multiple Containers
-  docker-compose up
+docker-compose up
+
+# run an Ubuntu container with:
+
+$ docker run -it ubuntu bash
